@@ -1,0 +1,203 @@
+<html>
+
+<HEAD>
+    <script>
+        let pos = 0;
+        let contadorInvasor = 0;
+        let contador = 0;
+        function move() {
+            //alert("no pinchhees");
+            let elem = document.getElementById("titulo")
+            if (elem.style.top == "30%") {
+                elem.style.top = "50%"
+                elem.innerHTML = "Hola"
+            } else {
+                elem.style.top = "30%";
+                //elem.textContent = "Adios"
+                elem.innerHTML = "adios"
+            }
+
+            console.log(parseInt(elem.style.top))
+        }
+
+
+        /*function move2() {
+
+
+
+            const elem = document.getElementById("pelota")
+
+            if (pos > 650) {
+                pos = 0
+                elem.style.top = `${pos}px`
+
+            } else {
+                elem.style.top = `${pos + 20}px`
+                pos = pos + 20
+            }
+
+        }*/
+
+
+        function initInvasors() {
+            var img = document.createElement('img');
+            img.src = './images/inv.png';
+            img.width = 100; img.height = 100; img.id = 'inv';
+            img.style.top = 50 + 'px';
+            img.style.left = screen.width - Math.floor(Math.random() * 1000) + 'px';
+            img.style.position = 'absolute';
+            document.getElementById('container').appendChild(img);
+
+        }
+
+        let posInv = 0;
+        function moveInvasors() {
+            /*if(contadorInvasor == 0){
+                document.getElementById("inv").style.top = 0 + 'px'
+            }*/
+            contadorInvasor++;
+            const elem = document.getElementById("inv")
+            if(elem){
+                if (posInv > 300) {
+                deleteObject(elem);
+                posInv = 0;
+            } else {
+                elem.style.top = `${posInv*1.5 + 20}px`
+                posInv = posInv + 20
+            }
+
+            }
+            
+        }
+
+
+
+        function deleteObject(obj) {
+            try {
+                const parent = document.getElementById('container');
+                console.log('tryeeeeeeeeeeeeeeeeeeeeeeeeeeeed', parent);
+                parent.removeChild(obj);
+
+            } catch (e) {
+               console.log(e);
+            }
+        }
+
+        function movimientoNave(event) {
+
+            document.getElementById('container').style.width = screen.width + 'px';
+            document.getElementById('container').style.height = screen.height + 'px';
+
+            if (contador == 0) {
+                let width = window.innerWidth
+                document.getElementById("nave").style.left = width / 2;
+            }
+
+            contador++
+
+            const elem = document.getElementById("nave")
+            console.log(parseInt(elem.style.left))
+            console.log(parseInt(elem.style.top))
+            // alert("no pinchhees");
+            switch (event.keyCode) {
+                ///¡left
+                case 37:
+                    console.log("izquierda")
+                    elem.style.left = (parseInt(elem.style.left) - 50) + 'px'
+                    if(!document.getElementById("inv"))
+                    initInvasors()
+                    break;
+                //right
+                case 39:
+                    console.log("derecha")
+                    elem.style.left = parseInt(elem.style.left) + 50 + 'px';
+                    if(!document.getElementById("inv"))
+                    initInvasors()
+                    break;
+
+                //space bar 
+                case 32:
+                    console.log("disparo")
+                    break;
+            }
+
+            if (parseInt(elem.style.left) > 1450 || parseInt(elem.style.left) < 118) {
+                elem.style.left = window.innerWidth / 2
+            }
+
+        }
+//onload="setInterval(move2,100)"
+    </script>
+    <style>
+        body {
+            background-image: url("https://www.xtrafondos.com/wallpapers/resoluciones/19/lineas-de-colores_1920x1080_3057.jpg");
+        }
+
+
+
+        h1 {
+            text-decoration: underline;
+            font-size: 50px;
+            color: blue;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+
+        }
+
+        h1:hover {
+            background-color: yellow;
+            cursor: grab
+        }
+
+        #pelota {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            border-radius: 25px;
+            position: absolute;
+        }
+
+        #nave {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 50%;
+            top: 90%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        #img {
+            position: absolute;
+        }
+
+        #container {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    <title>Primera web</title>
+</HEAD>
+//onload="movimientoNave(event)"
+//onload="setInterval(move2,100)"
+
+<body onload="setInterval(moveInvasors,100);" onkeydown="movimientoNave(event)">
+
+    <div id="container">
+        <img id="nave" src="images/nave.png">
+    </div>
+
+
+    <h1 id="titulo" onclick="move()">Hola</h1>
+
+    
+
+
+
+   
+</body>
+
+</html>
