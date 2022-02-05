@@ -1,5 +1,5 @@
 body {
-    background-image: url("https://www.xtrafondos.com/wallpapers/resoluciones/19/lineas-de-colores_1920x1080_3057.jpg");
+    background-image: url("https://a-static.besthdwallpaper.com/estrella-de-la-muerte-papel-pintado-1280x768-30466_13.jpg");
 }
 
 
@@ -20,6 +20,13 @@ h1:hover {
     cursor: grab
 }
 
+.marcador{
+    background-color: yellow;
+    font-size:20px;
+    padding: 5px;
+    margin:5px;
+    border:2px solid rgb(231, 190, 7);
+}
 
 .nave {
     background: tomato;
@@ -41,4 +48,15 @@ h1:hover {
     margin: 5px;
     border: 10px solid red;
     position:absolute;
+}
+
+
+.bala{
+    writing-mode: vertical-rl;
+    width: 10px;
+    height: 30px;
+    background:  #75b09c;
+    border: 10px solid #a0ca92;
+    position:absolute;
+    transform: translate(-50%, -50%);
 }
