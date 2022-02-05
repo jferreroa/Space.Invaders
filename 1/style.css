@@ -30,6 +30,8 @@ h1:hover {
 
 .nave {
     background: tomato;
+    width: 45px;
+    height: 20px;
     font-size: 18px;
     padding: 10px;
     margin: 5px;
@@ -58,5 +60,4 @@ h1:hover {
     background:  #75b09c;
     border: 10px solid #a0ca92;
     position:absolute;
-    transform: translate(-50%, -50%);
 }
