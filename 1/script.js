@@ -1,18 +1,17 @@
-let marcador = 0;
-function docWrite(variable) {
-  document.write(variable);
+let marcador = 0
+const docWrite = () => {
+  const containerMarcador = document.querySelector('.puntuacion')
+  containerMarcador.innerHTML = marcador
 }
+
 const crearNave = () => {
-  console.log("Creando nave")
-  let nave = document.createElement('div')
+  let nave = document.createElement('img')
   nave.className = 'nave'
   const left = Math.floor(Math.random() * 1300) + (0)
   nave.style.left = `${left}px`
   nave.style.top = "0px"
-  nave.innerHTML = 'NAVE'
-  nave.addEventListener('click', () => {
-    espacio.removeChild(nave)
-  })
+  //nave.innerHTML = 'NAVE'
+  nave.setAttribute('src', 'images/tie2.png')
   const espacio = document.querySelector('.espacio')
   espacio.appendChild(nave)
 }
@@ -21,42 +20,38 @@ const crearNave = () => {
 
 const crearBala = () => {
   console.log("creando bala")
-  let bala = document.createElement("div")
+  let bala = document.createElement("img")
   const personaje = document.querySelector(".personaje")
-  bala.style.left = parseInt(personaje.style.left) + 70 + "px"
-  bala.style.top = parseInt(personaje.style.top) - 30 + "px"
+  bala.style.left = parseInt(personaje.style.left) + 60 + "px"
+  bala.style.top = parseInt(personaje.style.top) - 15 + "px"
   bala.className = "bala"
-  bala.innerHTML = "bala"
+  bala.setAttribute('src', 'images/bala.png')
+  //bala.innerHTML = "bala"
   const espacio = document.querySelector(".espacio")
   espacio.appendChild(bala)
 }
 
 
 const crearPersonaje = () => {
-  console.log("Creando personaje");
-  let personaje = document.createElement("div")
+  let personaje = document.createElement("img")
+  personaje.setAttribute('src', 'images/nave.png')
   personaje.className = "personaje"
+  personaje.style.width = '100px'
   personaje.style.left = window.innerWidth / 2
   personaje.style.top = window.innerHeight - 200
-  personaje.innerHTML = "PERSONAJE"
+  // personaje.innerHTML = "PERSONAJE"
 
   document.addEventListener('keydown', (event) => {
     console.log("movimiento personaje")
     switch (event.key) {
       case "ArrowRight":
-        console.log("derecha" + document.querySelector(".personaje").style.left)
-
         document.querySelector(".personaje").style.left = parseInt(document.querySelector(".personaje").style.left) + 85 + 'px'
         break;
-
       case "ArrowLeft":
-        console.log("izquierda")
         document.querySelector(".personaje").style.left = parseInt(document.querySelector(".personaje").style.left) - 85 + 'px'
         break;
-
       case " ":
         crearBala()
-        console.log("ESPACIOOOOOOOOO")
         break;
 
     }
@@ -64,6 +59,31 @@ const crearPersonaje = () => {
 
   const espacio = document.querySelector(".espacio")
   espacio.appendChild(personaje)
+
+}
+
+const pantallFin = () => {
+  
+  let fin = document.createElement("img")
+  fin.className = "fin"
+  fin.setAttribute('src', 'images/LA0012953.jpg')
+  fin.style.left = window.innerWidth/2 + "px"
+  fin.style.top = window.innerHeight/2 + "px"
+  const espacio = document.querySelector(".espacio")
+  espacio.appendChild(fin)
+  
+}
+
+const finJuego = (crearNavesInterval,moverNavesInterval,moverBalasInterval) => {
+  clearInterval(crearNavesInterval)
+  clearInterval(moverNavesInterval)
+  clearInterval(moverBalasInterval)
+  const espacio = document.querySelector(".espacio")
+  while (espacio.hasChildNodes()) {  
+    espacio.removeChild(espacio.firstChild);
+  }
+
+  pantallFin()
 
 }
 
@@ -77,15 +97,14 @@ window.onload = () => {
 
 
   //crear naves
-  setInterval(() => {
-    console.log("cerar nave")
+  const crearNavesInterval = setInterval(() => {
     const naves = document.querySelectorAll(".nave")
-    if (naves.length < 4) {
+    if (naves.length < 6) {
       crearNave();
     }
 
     naves.forEach(nave => {
-      if (parseInt(nave.style.top) > 550) {
+      if (parseInt(nave.style.top) > 670) {
         const espacio = document.querySelector('.espacio')
         espacio.removeChild(nave)
       }
@@ -93,19 +112,17 @@ window.onload = () => {
   }, 400)
 
   //movimiento naves
-  setInterval(() => {
+  const moverNavesInterval = setInterval(() => {
     const naves = document.querySelectorAll(".nave")
     naves.forEach((nave, index) => {
-      console.log("movimiento nave" + nave.style.top + index)
       nave.style.top = parseInt(nave.style.top) + 5 + 'px'
-      console.log("new style top" + nave.style.top)
     })
   }, 100)
 
 
 
   //movimiento balas 
-  setInterval(() => {
+  const moverBalasInterval = setInterval(() => {
     const balas = document.querySelectorAll(".bala")
     const naves = document.querySelectorAll(".nave")
     const espacio = document.querySelector('.espacio')
@@ -129,27 +146,17 @@ window.onload = () => {
           YY: parseInt(nave.style.top) + 20
         };
         if (posBala.anchura <= posNave.XX && posBala.XX >= posNave.anchura && posBala.YY >= posNave.altura && posBala.altura <= posNave.YY) {
-
-          console.log("CHOCAAAAAAAAN")
           espacio.removeChild(nave)
           espacio.removeChild(bala)
-            marcador++
+          marcador++
+          docWrite()
+          if(marcador == 20){
+            finJuego(crearNavesInterval,moverNavesInterval,moverBalasInterval)
+          }
         }
       })
-
-
-
     })
-  }, 10)
-
-
-
-
-
-
-
-
-
+  }, 20)
 
 
 

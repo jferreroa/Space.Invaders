@@ -1,23 +1,5 @@
 body {
-    background-image: url("https://a-static.besthdwallpaper.com/estrella-de-la-muerte-papel-pintado-1280x768-30466_13.jpg");
-}
-
-
-h1 {
-    text-decoration: underline;
-    font-size: 50px;
-    color: blue;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-
-}
-
-h1:hover {
-    background-color: yellow;
-    cursor: grab
+    background-image: url("https://i.pinimg.com/originals/89/e7/56/89e756699eb2f77947c636231e1085be.jpg");
 }
 
 .marcador{
@@ -29,15 +11,10 @@ h1:hover {
 }
 
 .nave {
-    background: tomato;
-    width: 45px;
-    height: 20px;
-    font-size: 18px;
-    padding: 10px;
-    margin: 5px;
-    border: 10px solid red;
+    width: 70px;
+    height: 90px;
     position:absolute;
-  }
+}
 
 .espacio {
     display: flex;
@@ -45,10 +22,10 @@ h1:hover {
 }
 
 .personaje {
-    background:  pink;
+    /* background:  pink; */
     padding:10px;
     margin: 5px;
-    border: 10px solid red;
+    /* border: 10px solid red; */
     position:absolute;
 }
 
@@ -57,7 +34,10 @@ h1:hover {
     writing-mode: vertical-rl;
     width: 10px;
     height: 30px;
-    background:  #75b09c;
-    border: 10px solid #a0ca92;
     position:absolute;
+}
+
+.fin {
+    position:absolute;
+    transform: translate(-50%, -50%);
 }
