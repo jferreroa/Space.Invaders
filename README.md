@@ -5,4 +5,5 @@ El juego consiste en derrotar las naves enemigas, los **Caza estelar TIE/LN**, c
 
 ## Intrucciones de juego
 
-Teclas de movimeinto izquierda y derecha para moverse y la tecla de espacio para disparar.  
+Teclas de movimeinto izquierda y derecha para moverse y la tecla de espacio para disparar. 
+Derrota 20 naves enemigas para ganar.
